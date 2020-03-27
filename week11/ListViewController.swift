@@ -90,12 +90,17 @@ class ListViewController: UIViewController, UITableViewDataSource, UITableViewDe
 }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let note = noteList[indexPath.row]
-        if note.hasImage(){
+        /*
+         // Normal if-statement to determine the height of the cell
+        if noteList[indexPath.row].hasImage(){
             return 90
         }else{
             return 60
         }
+         */
+        
+        // One lined if-statement to determine the height of the cell
+        return noteList[indexPath.row].hasImage() ? 90 : 60 //ternary operator = one lined if statement
     }
     
     // MARK: - Pagination
