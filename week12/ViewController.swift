@@ -35,6 +35,86 @@ class ViewController: UIViewController {
 
     }
 
+    // MARK: - User Location Setup With Authorization
+    
+    // function that checks if the location services of the device isn't turned off
+    func checkLocationService(){
+        if CLLocationManager.locationServicesEnabled(){
+            setUpLocationManager()
+            checkLocationAuthorization()
+        }else{
+            // create an alert that tells the user to turn on location services
+        }
+    }
+    
+    // function that sets up the location manager which handles the user location
+    func setUpLocationManager(){
+        locationManager.delegate = self // sets the delegate
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest // sets the desired accuracy to the best possible accuracy
+        
+    }
+    
+    // Checks what kind of authorization is given
+    func checkLocationAuthorization(){
+        
+        switch CLLocationManager.authorizationStatus() {
+            
+        // When the app is used, we are authorized to access the user location
+        case .authorizedWhenInUse:
+            print("when in use")
+            startUpdatingUserLocationWhenAuthorized()
+            break
+            
+        // If we are denied access by the user
+        case .denied:
+            print("denied")
+            // show an alert to make the user know that it's device hasn't given permission
+            break
+            
+        // first time the app is opened, or if user chooese only to give access one time
+        case .notDetermined:
+            // we net to setup the p-list to be able to ask for authorization
+            locationManager.requestWhenInUseAuthorization() // requests the type of authorization that we want
+            break
+            
+        // if the user cannot change this app’s status, possibly due to active restrictions such as parental controls being in place
+        case .restricted:
+            print("restricted")
+            // show alert
+            break
+            
+        // if it's always it should start updating user location
+        case .authorizedAlways:
+            print("always")
+            startUpdatingUserLocationWhenAuthorized()
+            break
+            
+        // if a defailt shpuld come in future updates we are covered by @unkown
+        @unknown default:
+            print("my default")
+            break
+        }
+    }
+    
+    
+    func startUpdatingUserLocationWhenAuthorized(){
+        map.showsUserLocation = true // shows the blue dot on the map
+        centerViewOnUserLocation()
+        locationManager.startUpdatingLocation() // Calls the didUpdateLocation method in the extension
+        //if the user moves, the locationmanager will update the location
+    }
+    
+    
+    // MARK: - Map view setup
+    
+    // centers the view on the user location
+    func centerViewOnUserLocation(){
+        if let location = locationManager.location?.coordinate {
+            let region = MKCoordinateRegion.init(center: location, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
+            map.setRegion(region, animated: true)
+        }
+    }
+    
     // Here we added a longpress gesture recognizer in the storyboard and connected it as an action
     @IBAction func longPressed(_ sender: UILongPressGestureRecognizer) {
         
@@ -69,7 +149,7 @@ class ViewController: UIViewController {
             
             // to avoid us getting an optional we unwrap self here
             // it's guarded so if it's nil, it will return nothing (which is the same as exiting this function)
-            guard let self = self else { return }
+            guard let self = self else { return } // we don't use self in this closure, but this is for demonstration purposes
             
             // if there is an error we wan't to alert the user
             // the underscore is a way of saying that we are not interested in giving the constant a name
@@ -103,64 +183,7 @@ class ViewController: UIViewController {
         }
         
     }
-    
-    // function that sets up the location manager
-    func setUpLocationManager(){
-        locationManager.delegate = self // sets the delegate
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest // sets the desired accuracy to the best possible accuracy
-        
-    }
-    
-    // function that checks if the location services of the device isn't turned off
-    func checkLocationService(){
-        if CLLocationManager.locationServicesEnabled(){
-            setUpLocationManager()
-            checkLocationAuthorization()
-        }else{
-            // create an alert that tells the user to turn on location services
-        }
-    }
-    
-    func centerViewOnUserLocation(){
-        if let location = locationManager.location?.coordinate {
-            let region = MKCoordinateRegion.init(center: location, latitudinalMeters: regionInMeters, longitudinalMeters: regionInMeters)
-            map.setRegion(region, animated: true)
-        }
-    }
-    
-    func checkLocationAuthorization(){
-        switch CLLocationManager.authorizationStatus() {
-        case .authorizedWhenInUse:
-            print("when in use")
-            map.showsUserLocation = true
-            centerViewOnUserLocation()
-            locationManager.startUpdatingLocation() // if the user moves, the locationmanager will update the location. Calls the didUpdateLocation method in the extension
-            break
-            
-        case .denied:
-            // show an alert to make the user know that it's device hasn't given permission
-            break
-            
-        case .notDetermined:
-            locationManager.requestWhenInUseAuthorization() // requests the type of authorization that we want
-            break
-            
-        case .restricted:
-            print("restricted")
 
-            break
-            
-        case .authorizedAlways:
-            break
-            
-        
-        @unknown default:
-            print("my default")
-            break
-        }
-    }
-    
-    
     
     func updateMarkersOnMap(snap: QuerySnapshot){
         let annotations = MapDataAdapter.getMKAnnotationsFromData(snap: snap)
@@ -196,7 +219,7 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: MKMapViewDelegate{
-    // function that styles each annotation
+    // function that styles each annotation accept the user location
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         
         // We use a guard statement to check if the annotation is a user location
