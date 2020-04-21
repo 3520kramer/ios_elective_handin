@@ -1,7 +1,7 @@
 # ios_elective_handin
 On the course IOS we have to hand in an assignment each week, which reflects what we've been working on.
 
-Week 12 - MapView
+Week 12 - MapView \n
 An app with a map where you can long press on the map to set a pin and save the location in firebase. It also shows the userlocation after having requested permission to use location services on the device
 
 Week 11 - TableView with custom cell implementation
