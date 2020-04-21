@@ -5,7 +5,7 @@ Week 12 - MapView
 
 An app with a map where you can long press on the map to set a pin and save the location in firebase. It also shows the userlocation after having requested permission to use location services on the device
 
--
+---
 
 Week 11 - TableView with custom cell implementation
 
