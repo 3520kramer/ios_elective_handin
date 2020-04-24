@@ -1,5 +1,16 @@
 # ios_elective_handin
-On the course IOS we have to hand in an assignment each week, which reflects what we've been working on.
+On the course IOS we hand in an assignment each week, which reflects what we've been working on.
+
+---
+Week 14 - Firebase authentication with facebook login and graph request
+---
+This week we made a simple app which should display something which couldn't be seen prior to signing in. We used the functionality from firebase authentication to manage users. Then we had to expand the app to be able to log in via facebook. Later we had to use the facebook graph to grap user data
+
+---
+
+Week 13 - Camera Roll
+---
+...
 
 ---
 
