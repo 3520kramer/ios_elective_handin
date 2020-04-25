@@ -10,7 +10,7 @@ This week we made a simple app which should display something which couldn't be 
 
 Week 13 - Camera Roll
 ---
-...
+An app which can capture pictures and videos from the camera or photo library. It can resize the picture, and add text on top of it. I also added a swipe gesture recognizer so if you swipe right, the photo is saved, and if you swipe left it will dissappear
 
 ---
 
