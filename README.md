@@ -2,6 +2,19 @@
 On the course IOS we hand in an assignment each week, which reflects what we've been working on.
 
 ---
+
+Week 16 - Written Assignment
+---
+No code this week, we handed in a document where we each had to describe closures and the difference between weak and strong variables.
+
+---
+
+Week 15 - No assignments
+---
+No school this week, because of Good Friday holiday
+
+---
+
 Week 14 - Firebase authentication with facebook login and graph request
 ---
 This week we made a simple app which should display something which couldn't be seen prior to signing in. We used the functionality from firebase authentication to manage users. Then we had to expand the app to be able to log in via facebook. Later we had to use the facebook graph to grap user data
