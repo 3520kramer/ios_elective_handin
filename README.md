@@ -8,15 +8,10 @@ This week we worked with the different sensors in our devices. I made an app whi
 ---
 Week 16 - Written assignment
 ---
-No code this week, we handed in a document where we each had to describe closures and the difference between weak and strong variables.
+No code this week! We handed in a document where we each had to describe closures and the difference between weak and strong variables.
 
 ---
 
-Week 16 - Written Assignment
----
-No code this week, we handed in a document where we each had to describe closures and the difference between weak and strong variables.
-
----
 
 Week 15 - No assignments
 ---
