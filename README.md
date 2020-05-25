@@ -1,6 +1,11 @@
 # ios_elective_handin
 On the course IOS we hand in an assignment each week, which reflects what we've been working on.
 
+Week 18 - Quarantine App
+---
+This week we worked with tab bar apps. But our mandatory assignment was to make an app which related to the current corona virus. So i practised using URLSession to get data from the api.covid19api.com and present with options such as country selection and province selection
+
+---
 Week 17 - Sensors
 ---
 This week we worked with the different sensors in our devices. I made an app which uses CoreMotion to zoom in or out on the map and motionEnded for handling a shake gesture to center the view on the users current location
